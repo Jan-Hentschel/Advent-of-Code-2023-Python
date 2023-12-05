@@ -1,12 +1,13 @@
 with open(".\day 2\input.txt", "r") as input:
     sum=0
+    powerSum = 0
     lines = input.readlines()
     ID=1
     for line in lines:
         redMax = 0
         greenMax = 0
         blueMax = 0
-        if ID < 9:
+        if ID < 10:
             games = line[8:].split(";")
         elif ID < 100:
             games = line[9:].split(";")
@@ -42,6 +43,10 @@ with open(".\day 2\input.txt", "r") as input:
 
         if redMax <= 12 and greenMax <= 13 and blueMax <= 14:
             sum += ID
-            print(sum)
+        power=(redMax*greenMax*blueMax)
+        print(power)
+        powerSum+=power
+
         ID+=1
-        
+    print(sum)
+    print(powerSum)
