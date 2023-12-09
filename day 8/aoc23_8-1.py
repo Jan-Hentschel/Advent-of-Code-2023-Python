@@ -9,30 +9,13 @@ for line in lines[2:]:
 instructions = lines[0].replace("\n", "")
 print(instructions)
 steps = 0
-
-def allKeysEndInZ(currentKeys):
-    for key in currentKeys:
-        if key[2] != "Z":
-            return True
-    return False
-
-
-currentKeys = []
-for key in dict.keys():
-    if key[2] == "A":
-        currentKeys.append(key)
-print(currentKeys)
-
-while allKeysEndInZ(currentKeys):
+currentKey = "AAA"
+while currentKey != "ZZZ":
     for char in instructions:
-        for i,currentKey in enumerate(currentKeys):
-            if char == "L":
-                print(currentKey, dict[currentKey][0], steps, char)
-                currentKeys[i] = dict[currentKey][0]
-                
-            elif char == "R":
-                print(currentKey,dict[currentKey][1], steps, char)
-                currentKeys[i] = dict[currentKey][1]
-        print(currentKeys)
+        if char == "L":
+            currentKey = dict[currentKey][0]
+        elif char == "R":
+            currentKey = dict[currentKey][1]
         steps +=1
+
 print(steps)
