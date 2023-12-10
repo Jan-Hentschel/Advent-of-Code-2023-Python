@@ -15,7 +15,7 @@ pipes = {
 }
 
 newMapDict = {
-    (22,91): ["west", "S", 0]
+    (22,91): ["east", "S", 0]
               
 }
 
@@ -30,8 +30,18 @@ while currentPosition != (22, 91):
         nextDirection = pipes[currentChar][1]
     elif pipes[currentChar][1] == lastDirection:
         nextDirection = pipes[currentChar][0]
-        
-    newMapDict[currentPosition] = [nextDirection, currentChar, steps]
+    vertDir = ""
+    if nextDirection == "west" or nextDirection == "east":
+        if lastDirection == "south":
+           vertDir = "north"
+        elif lastDirection == "north":
+            vertDir = "south"
+    else:
+        vertDir = nextDirection
+    if currentChar == "J" or currentChar == "L":
+        vertDir = ""
+
+    newMapDict[currentPosition] = [vertDir, currentChar, steps]
 
     if nextDirection == "south":
         currentPosition = (currentPosition[0] + 1, currentPosition[1])
@@ -45,6 +55,8 @@ while currentPosition != (22, 91):
     elif nextDirection == "east":
         currentPosition = (currentPosition[0], currentPosition[1] + 1)
         lastDirection = "west"
+
+    
     steps += 1
 
 for y,line in enumerate(lines):
@@ -60,10 +72,10 @@ for y,line in enumerate(lines):
                     elif pipeDir == "south":
                         isOutside += 1
                 position[1]-=1
-            print(isOutside)
+            print(isOutside, (y,x))
             if isOutside != 0:
                 numTiles += 1
 
-
+print(newMapDict)
 
 print(numTiles)
